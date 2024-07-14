@@ -31,7 +31,7 @@ function scene1() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
-        .attr("height", window.innerHeight - 50); // Set height based on the window's inner height
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -107,7 +107,7 @@ function scene2() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
-        .attr("height", window.innerHeight - 50); // Set height based on the window's inner height
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -183,7 +183,7 @@ function scene3() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
-        .attr("height", window.innerHeight - 50); // Set height based on the window's inner height
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -259,7 +259,7 @@ function scene4() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
-        .attr("height", window.innerHeight - 50); // Set height based on the window's inner height
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
