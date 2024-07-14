@@ -2,9 +2,12 @@ let covidData;
 
 // Load the dataset from the GitHub repository
 d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/gh-pages/covid%2019%20CountryWise.csv").then(data => {
+    console.log("Data loaded:", data);  // Debugging statement
     covidData = data;
     // Initialize the first scene
     scene1();
+}).catch(error => {
+    console.error("Error loading the data:", error);
 });
 
 function clearVisualization() {
@@ -14,6 +17,7 @@ function clearVisualization() {
 // Scene 1: Introduction to global COVID-19 statistics by country
 function scene1() {
     clearVisualization();
+    console.log("Scene 1 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
@@ -23,6 +27,7 @@ function scene1() {
     const height = svg.node().getBoundingClientRect().height;
 
     const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+    console.log("Scene 1 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
         .domain(data.map(d => d.Country))
@@ -78,6 +83,7 @@ function scene1() {
 // Scene 2: Detailed comparison of COVID-19 deaths by region
 function scene2() {
     clearVisualization();
+    console.log("Scene 2 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
@@ -90,6 +96,7 @@ function scene2() {
         .key(d => d.Region)
         .rollup(v => d3.sum(v, d => +d["Total Deaths"]))
         .entries(covidData);
+    console.log("Scene 2 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
         .domain(data.map(d => d.key))
@@ -145,6 +152,7 @@ function scene2() {
 // Scene 3: Country-specific deep dive
 function scene3() {
     clearVisualization();
+    console.log("Scene 3 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
@@ -154,6 +162,7 @@ function scene3() {
     const height = svg.node().getBoundingClientRect().height;
 
     const data = covidData.sort((a, b) => d3.descending(+a["Total Deaths"], +b["Total Deaths"])).slice(0, 20);
+    console.log("Scene 3 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
         .domain(data.map(d => d.Country))
@@ -209,6 +218,7 @@ function scene3() {
 // Scene 4: Interactive exploration of specific countries
 function scene4() {
     clearVisualization();
+    console.log("Scene 4 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
@@ -218,6 +228,7 @@ function scene4() {
     const height = svg.node().getBoundingClientRect().height;
 
     const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+    console.log("Scene 4 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
         .domain(data.map(d => d.Country))
