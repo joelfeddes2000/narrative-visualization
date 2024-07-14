@@ -14,6 +14,10 @@ function clearVisualization() {
     d3.select("#visualization").selectAll("*").remove();
 }
 
+function clearVisualization() {
+    d3.select("#visualization").selectAll("*").remove();
+}
+
 // Scene 1: Introduction to global COVID-19 statistics by country
 function scene1() {
     clearVisualization();
