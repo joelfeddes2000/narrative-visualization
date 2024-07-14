@@ -73,16 +73,16 @@ function scene1() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", (width + 100) / 2)
-        .attr("y", height - 10)
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height - 5)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", -50)
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
@@ -142,16 +142,16 @@ function scene2() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", (width + 100) / 2)
-        .attr("y", height - 10)
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height - 5)
         .text("Region");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", -50)
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
@@ -211,16 +211,16 @@ function scene3() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", (width + 100) / 2)
-        .attr("y", height - 10)
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height - 5)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", -50)
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
@@ -298,16 +298,16 @@ function scene4() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", (width + 100) / 2)
-        .attr("y", height - 10)
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height - 5)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "end")
-        .attr("x", -50)
+        .attr("text-anchor", "middle")
+        .attr("x", -height / 2)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
