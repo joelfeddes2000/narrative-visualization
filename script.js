@@ -64,24 +64,22 @@ function scene1() {
         .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
-    // Add annotations
-    const annotations = [
-        {
-            note: { label: "Most cases in the USA" },
-            x: xScale("United States of America") + xScale.bandwidth() / 2,
-            y: yScale(94152573),
-            dy: -10,
-            dx: 50
-        }
-    ];
+    // X axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", width - 50)
+        .attr("y", height - 10)
+        .text("Country");
 
-    const makeAnnotations = d3.annotation()
-        .type(d3.annotationLabel)
-        .annotations(annotations);
-
-    svg.append("g")
-        .attr("class", "annotation-group")
-        .call(makeAnnotations);
+    // Y axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", -50)
+        .attr("y", 20)
+        .attr("transform", "rotate(-90)")
+        .text("Total Cases");
 }
 
 // Scene 2: Detailed comparison of COVID-19 deaths by region
@@ -100,10 +98,7 @@ function scene2() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const data = d3.nest()
-        .key(d => d.Region)
-        .rollup(v => d3.sum(v, d => +d["Total Deaths"]))
-        .entries(covidData);
+    const data = Array.from(d3.group(covidData, d => d.Region), ([key, value]) => ({ key, value: d3.sum(value, d => +d["Total Deaths"]) }));
     console.log("Scene 2 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
@@ -137,24 +132,22 @@ function scene2() {
         .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
-    // Add annotations
-    const annotations = [
-        {
-            note: { label: "Most deaths in the Americas" },
-            x: xScale("Americas") + xScale.bandwidth() / 2,
-            y: yScale(d3.sum(covidData.filter(d => d.Region === "Americas"), d => +d["Total Deaths"])),
-            dy: -10,
-            dx: 50
-        }
-    ];
+    // X axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", width - 50)
+        .attr("y", height - 10)
+        .text("Region");
 
-    const makeAnnotations = d3.annotation()
-        .type(d3.annotationLabel)
-        .annotations(annotations);
-
-    svg.append("g")
-        .attr("class", "annotation-group")
-        .call(makeAnnotations);
+    // Y axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", -50)
+        .attr("y", 20)
+        .attr("transform", "rotate(-90)")
+        .text("Total Deaths");
 }
 
 // Scene 3: Country-specific deep dive
@@ -207,24 +200,22 @@ function scene3() {
         .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
-    // Add annotations
-    const annotations = [
-        {
-            note: { label: "Most deaths in the USA" },
-            x: xScale("United States of America") + xScale.bandwidth() / 2,
-            y: yScale(1040506),
-            dy: -10,
-            dx: 50
-        }
-    ];
+    // X axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", width - 50)
+        .attr("y", height - 10)
+        .text("Country");
 
-    const makeAnnotations = d3.annotation()
-        .type(d3.annotationLabel)
-        .annotations(annotations);
-
-    svg.append("g")
-        .attr("class", "annotation-group")
-        .call(makeAnnotations);
+    // Y axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", -50)
+        .attr("y", 20)
+        .attr("transform", "rotate(-90)")
+        .text("Total Deaths");
 }
 
 // Scene 4: Interactive exploration of specific countries
@@ -294,6 +285,23 @@ function scene4() {
     svg.append("g")
         .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
+
+    // X axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", width - 50)
+        .attr("y", height - 10)
+        .text("Country");
+
+    // Y axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "end")
+        .attr("x", -50)
+        .attr("y", 20)
+        .attr("transform", "rotate(-90)")
+        .text("Total Cases");
 }
 
 // Initialize the first scene
