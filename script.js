@@ -30,13 +30,13 @@ function scene1() {
     console.log("Scene 1 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", "100%")
-        .attr("height", 500);
+        .attr("width", 1500) // Increase the width to provide more space for bars
+        .attr("height", 600); // Adjust the height if needed
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 100, left: 100 };
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -82,7 +82,7 @@ function scene1() {
         .attr("class", "axis-label")
         .attr("text-anchor", "middle")
         .attr("x", margin.left + innerWidth / 2)
-        .attr("y", height - 40)
+        .attr("y", height - 60)
         .text("Country");
 
     // Y axis label
@@ -106,13 +106,13 @@ function scene2() {
     console.log("Scene 2 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", "100%")
-        .attr("height", 500);
+        .attr("width", 1500) // Increase the width to provide more space for bars
+        .attr("height", 600); // Adjust the height if needed
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 100, left: 100 };
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -158,7 +158,7 @@ function scene2() {
         .attr("class", "axis-label")
         .attr("text-anchor", "middle")
         .attr("x", margin.left + innerWidth / 2)
-        .attr("y", height - 40)
+        .attr("y", height - 60)
         .text("Region");
 
     // Y axis label
@@ -182,13 +182,13 @@ function scene3() {
     console.log("Scene 3 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", "100%")
-        .attr("height", 500);
+        .attr("width", 1500) // Increase the width to provide more space for bars
+        .attr("height", 600); // Adjust the height if needed
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 100, left: 100 };
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -234,7 +234,7 @@ function scene3() {
         .attr("class", "axis-label")
         .attr("text-anchor", "middle")
         .attr("x", margin.left + innerWidth / 2)
-        .attr("y", height - 40)
+        .attr("y", height - 60)
         .text("Country");
 
     // Y axis label
@@ -258,13 +258,13 @@ function scene4() {
     console.log("Scene 4 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", "100%")
-        .attr("height", 500);
+        .attr("width", 1500) // Increase the width to provide more space for bars
+        .attr("height", 600); // Adjust the height if needed
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 100, left: 100 };
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -328,7 +328,7 @@ function scene4() {
         .attr("class", "axis-label")
         .attr("text-anchor", "middle")
         .attr("x", margin.left + innerWidth / 2)
-        .attr("y", height - 40)
+        .attr("y", height - 60)
         .text("Country");
 
     // Y axis label
