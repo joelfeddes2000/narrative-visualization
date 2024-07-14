@@ -1,9 +1,16 @@
-// Function to clear the current visualization
+let covidData;
+
+d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/main/covid 19 CountryWise.csv").then(data => {
+    covidData = data;
+    // Initialize the first scene
+    scene1();
+});
+
 function clearVisualization() {
     d3.select("#visualization").selectAll("*").remove();
 }
 
-// Scene 1: Introduction to global COVID-19 statistics
+// Scene 1: Introduction to global COVID-19 statistics by country
 function scene1() {
     clearVisualization();
     const svg = d3.select("#visualization")
@@ -11,24 +18,18 @@ function scene1() {
         .attr("width", "100%")
         .attr("height", "100%");
 
-    // Example data to illustrate
-    const data = [
-        { country: "USA", cases: 94152573, deaths: 1040506 },
-        { country: "India", cases: 44516479, deaths: 528250 },
-        { country: "Brazil", cases: 34544377, deaths: 685002 },
-        // Add more countries...
-    ];
-
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.country))
-        .range([50, width - 50])
+        .domain(data.map(d => d.Country))
+        .range([100, width - 50])
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.cases)])
+        .domain([0, d3.max(data, d => +d["Total Cases"])])
         .range([height - 50, 50]);
 
     svg.selectAll(".bar")
@@ -36,25 +37,28 @@ function scene1() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.country))
-        .attr("y", d => yScale(d.cases))
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 50 - yScale(d.cases))
+        .attr("height", d => height - 50 - yScale(+d["Total Cases"]))
         .attr("fill", "steelblue");
 
     svg.append("g")
         .attr("transform", `translate(0,${height - 50})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
     svg.append("g")
-        .attr("transform", `translate(50,0)`)
+        .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
     // Add annotations
     const annotations = [
         {
             note: { label: "Most cases in the USA" },
-            x: xScale("USA") + xScale.bandwidth() / 2,
+            x: xScale("United States of America") + xScale.bandwidth() / 2,
             y: yScale(94152573),
             dy: -10,
             dx: 50
@@ -70,7 +74,7 @@ function scene1() {
         .call(makeAnnotations);
 }
 
-// Scene 2: Detailed comparison of cases and deaths across continents
+// Scene 2: Detailed comparison of COVID-19 deaths by region
 function scene2() {
     clearVisualization();
     const svg = d3.select("#visualization")
@@ -78,23 +82,21 @@ function scene2() {
         .attr("width", "100%")
         .attr("height", "100%");
 
-    // Example data to illustrate
-    const data = [
-        { continent: "Americas", cases: 120000000, deaths: 2300000 },
-        { continent: "Europe", cases: 80000000, deaths: 2000000 },
-        // Add more continents...
-    ];
-
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
+    const data = d3.nest()
+        .key(d => d.Region)
+        .rollup(v => d3.sum(v, d => +d["Total Deaths"]))
+        .entries(covidData);
+
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.continent))
-        .range([50, width - 50])
+        .domain(data.map(d => d.key))
+        .range([100, width - 50])
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.cases)])
+        .domain([0, d3.max(data, d => d.value)])
         .range([height - 50, 50]);
 
     svg.selectAll(".bar")
@@ -102,26 +104,29 @@ function scene2() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.continent))
-        .attr("y", d => yScale(d.cases))
+        .attr("x", d => xScale(d.key))
+        .attr("y", d => yScale(d.value))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 50 - yScale(d.cases))
+        .attr("height", d => height - 50 - yScale(d.value))
         .attr("fill", "steelblue");
 
     svg.append("g")
         .attr("transform", `translate(0,${height - 50})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
     svg.append("g")
-        .attr("transform", `translate(50,0)`)
+        .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
     // Add annotations
     const annotations = [
         {
-            note: { label: "Most cases in Americas" },
+            note: { label: "Most deaths in the Americas" },
             x: xScale("Americas") + xScale.bandwidth() / 2,
-            y: yScale(120000000),
+            y: yScale(d3.sum(covidData.filter(d => d.Region === "Americas"), d => +d["Total Deaths"])),
             dy: -10,
             dx: 50
         }
@@ -144,23 +149,18 @@ function scene3() {
         .attr("width", "100%")
         .attr("height", "100%");
 
-    // Example data to illustrate
-    const data = [
-        { country: "USA", cases: 94152573, deaths: 1040506 },
-        { country: "India", cases: 44516479, deaths: 528250 },
-        // Add more countries...
-    ];
-
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Deaths"], +b["Total Deaths"])).slice(0, 20);
+
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.country))
-        .range([50, width - 50])
+        .domain(data.map(d => d.Country))
+        .range([100, width - 50])
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.cases)])
+        .domain([0, d3.max(data, d => +d["Total Deaths"])])
         .range([height - 50, 50]);
 
     svg.selectAll(".bar")
@@ -168,26 +168,29 @@ function scene3() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.country))
-        .attr("y", d => yScale(d.cases))
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Deaths"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 50 - yScale(d.cases))
+        .attr("height", d => height - 50 - yScale(+d["Total Deaths"]))
         .attr("fill", "steelblue");
 
     svg.append("g")
         .attr("transform", `translate(0,${height - 50})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
     svg.append("g")
-        .attr("transform", `translate(50,0)`)
+        .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 
     // Add annotations
     const annotations = [
         {
-            note: { label: "Most cases in the USA" },
-            x: xScale("USA") + xScale.bandwidth() / 2,
-            y: yScale(94152573),
+            note: { label: "Most deaths in the USA" },
+            x: xScale("United States of America") + xScale.bandwidth() / 2,
+            y: yScale(1040506),
             dy: -10,
             dx: 50
         }
@@ -210,23 +213,18 @@ function scene4() {
         .attr("width", "100%")
         .attr("height", "100%");
 
-    // Example data to illustrate
-    const data = [
-        { country: "USA", cases: 94152573, deaths: 1040506 },
-        { country: "India", cases: 44516479, deaths: 528250 },
-        // Add more countries...
-    ];
-
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.country))
-        .range([50, width - 50])
+        .domain(data.map(d => d.Country))
+        .range([100, width - 50])
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.cases)])
+        .domain([0, d3.max(data, d => +d["Total Cases"])])
         .range([height - 50, 50]);
 
     svg.selectAll(".bar")
@@ -234,10 +232,10 @@ function scene4() {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.country))
-        .attr("y", d => yScale(d.cases))
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 50 - yScale(d.cases))
+        .attr("height", d => height - 50 - yScale(+d["Total Cases"]))
         .attr("fill", "steelblue")
         .on("mouseover", function(event, d) {
             d3.select(this)
@@ -249,7 +247,7 @@ function scene4() {
                 .attr("x", x + 10)
                 .attr("y", y - 10)
                 .attr("fill", "black")
-                .text(`Cases: ${d.cases}, Deaths: ${d.deaths}`);
+                .text(`Cases: ${d["Total Cases"]}, Deaths: ${d["Total Deaths"]}`);
         })
         .on("mouseout", function() {
             d3.select(this)
@@ -260,10 +258,13 @@ function scene4() {
 
     svg.append("g")
         .attr("transform", `translate(0,${height - 50})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
     svg.append("g")
-        .attr("transform", `translate(50,0)`)
+        .attr("transform", `translate(100,0)`)
         .call(d3.axisLeft(yScale));
 }
 
