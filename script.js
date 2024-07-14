@@ -1,7 +1,7 @@
 let covidData;
 
 // Load the dataset from the GitHub repository
-d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/gh-pages/covid%2019%20CountryWise.csv").then(data => {
+d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/gh-pages/covid19countrywise.csv").then(data => {
     console.log("Data loaded:", data);  // Debugging statement
     covidData = data;
     // Initialize the first scene
