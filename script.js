@@ -30,8 +30,8 @@ function scene1() {
     console.log("Scene 1 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", 1800) // Increase the width to provide more space for bars
-        .attr("height", 600); // Adjust the height if needed
+        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -106,8 +106,8 @@ function scene2() {
     console.log("Scene 2 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", 1800) // Increase the width to provide more space for bars
-        .attr("height", 600); // Adjust the height if needed
+        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -182,8 +182,8 @@ function scene3() {
     console.log("Scene 3 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", 1800) // Increase the width to provide more space for bars
-        .attr("height", 600); // Adjust the height if needed
+        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -258,8 +258,8 @@ function scene4() {
     console.log("Scene 4 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", 1800) // Increase the width to provide more space for bars
-        .attr("height", 600); // Adjust the height if needed
+        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
