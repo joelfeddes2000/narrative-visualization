@@ -116,7 +116,8 @@ function scene2() {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const data = Array.from(d3.group(covidData, d => d.Region), ([key, value]) => ({ key, value: d3.sum(value, d => +d["Total Deaths"]) }));
+    let data = Array.from(d3.group(covidData, d => d.Region), ([key, value]) => ({ key, value: d3.sum(value, d => +d["Total Deaths"]) }));
+    data = data.sort((a, b) => d3.descending(a.value, b.value)); // Sort data by Total Deaths
     console.log("Scene 2 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
