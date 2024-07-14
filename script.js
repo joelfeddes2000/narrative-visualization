@@ -17,6 +17,10 @@ function clearVisualization() {
 // Scene 1: Introduction to global COVID-19 statistics by country
 function scene1() {
     clearVisualization();
+    if (!covidData) {
+        console.error("No data available for Scene 1");
+        return;
+    }
     console.log("Scene 1 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
@@ -83,6 +87,10 @@ function scene1() {
 // Scene 2: Detailed comparison of COVID-19 deaths by region
 function scene2() {
     clearVisualization();
+    if (!covidData) {
+        console.error("No data available for Scene 2");
+        return;
+    }
     console.log("Scene 2 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
@@ -152,6 +160,10 @@ function scene2() {
 // Scene 3: Country-specific deep dive
 function scene3() {
     clearVisualization();
+    if (!covidData) {
+        console.error("No data available for Scene 3");
+        return;
+    }
     console.log("Scene 3 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
@@ -218,6 +230,10 @@ function scene3() {
 // Scene 4: Interactive exploration of specific countries
 function scene4() {
     clearVisualization();
+    if (!covidData) {
+        console.error("No data available for Scene 4");
+        return;
+    }
     console.log("Scene 4 data:", covidData);  // Debugging statement
     const svg = d3.select("#visualization")
         .append("svg")
