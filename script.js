@@ -1,6 +1,7 @@
 let covidData;
 
-d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/main/covid 19 CountryWise.csv").then(data => {
+// Load the dataset from the GitHub repository
+d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization/gh-pages/covid%2019%20CountryWise.csv").then(data => {
     covidData = data;
     // Initialize the first scene
     scene1();
