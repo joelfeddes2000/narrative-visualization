@@ -12,15 +12,17 @@ d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization
 
 function clearVisualization() {
     d3.select("#visualization").selectAll("*").remove();
+    d3.selectAll(".nav-button").classed("active", false);
 }
 
-function clearVisualization() {
-    d3.select("#visualization").selectAll("*").remove();
+function activateButton(buttonId) {
+    d3.select(`#${buttonId}`).classed("active", true);
 }
 
 // Scene 1: Introduction to global COVID-19 statistics by country
 function scene1() {
     clearVisualization();
+    activateButton("btn-scene1");
     if (!covidData) {
         console.error("No data available for Scene 1");
         return;
@@ -72,7 +74,7 @@ function scene1() {
     svg.append("text")
         .attr("class", "axis-label")
         .attr("text-anchor", "end")
-        .attr("x", width - 50)
+        .attr("x", (width + 100) / 2)
         .attr("y", height - 10)
         .text("Country");
 
@@ -89,6 +91,7 @@ function scene1() {
 // Scene 2: Detailed comparison of COVID-19 deaths by region
 function scene2() {
     clearVisualization();
+    activateButton("btn-scene2");
     if (!covidData) {
         console.error("No data available for Scene 2");
         return;
@@ -140,7 +143,7 @@ function scene2() {
     svg.append("text")
         .attr("class", "axis-label")
         .attr("text-anchor", "end")
-        .attr("x", width - 50)
+        .attr("x", (width + 100) / 2)
         .attr("y", height - 10)
         .text("Region");
 
@@ -157,6 +160,7 @@ function scene2() {
 // Scene 3: Country-specific deep dive
 function scene3() {
     clearVisualization();
+    activateButton("btn-scene3");
     if (!covidData) {
         console.error("No data available for Scene 3");
         return;
@@ -208,7 +212,7 @@ function scene3() {
     svg.append("text")
         .attr("class", "axis-label")
         .attr("text-anchor", "end")
-        .attr("x", width - 50)
+        .attr("x", (width + 100) / 2)
         .attr("y", height - 10)
         .text("Country");
 
@@ -225,6 +229,7 @@ function scene3() {
 // Scene 4: Interactive exploration of specific countries
 function scene4() {
     clearVisualization();
+    activateButton("btn-scene4");
     if (!covidData) {
         console.error("No data available for Scene 4");
         return;
@@ -294,7 +299,7 @@ function scene4() {
     svg.append("text")
         .attr("class", "axis-label")
         .attr("text-anchor", "end")
-        .attr("x", width - 50)
+        .attr("x", (width + 100) / 2)
         .attr("y", height - 10)
         .text("Country");
 
