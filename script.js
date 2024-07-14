@@ -31,7 +31,7 @@ function scene1() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
-        .attr("height", 600);
+        .attr("height", "100%");
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -46,7 +46,7 @@ function scene1() {
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => +d["Total Cases"])])
-        .range([height - 100, 50]);
+        .range([height - 50, 50]);
 
     svg.selectAll(".bar")
         .data(data)
@@ -56,11 +56,11 @@ function scene1() {
         .attr("x", d => xScale(d.Country))
         .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 100 - yScale(+d["Total Cases"]))
+        .attr("height", d => height - 50 - yScale(+d["Total Cases"]))
         .attr("fill", "steelblue");
 
     svg.append("g")
-        .attr("transform", `translate(0,${height - 100})`)
+        .attr("transform", `translate(0,${height - 50})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
         .attr("transform", "rotate(-45)")
@@ -73,16 +73,16 @@ function scene1() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height - 50)
+        .attr("text-anchor", "end")
+        .attr("x", (width + 100) / 2)
+        .attr("y", height - 10)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", -height / 2)
+        .attr("text-anchor", "end")
+        .attr("x", -50)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
@@ -100,7 +100,7 @@ function scene2() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
-        .attr("height", 600);
+        .attr("height", "100%");
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -115,7 +115,7 @@ function scene2() {
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => d.value)])
-        .range([height - 100, 50]);
+        .range([height - 50, 50]);
 
     svg.selectAll(".bar")
         .data(data)
@@ -125,11 +125,11 @@ function scene2() {
         .attr("x", d => xScale(d.key))
         .attr("y", d => yScale(d.value))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 100 - yScale(d.value))
+        .attr("height", d => height - 50 - yScale(d.value))
         .attr("fill", "steelblue");
 
     svg.append("g")
-        .attr("transform", `translate(0,${height - 100})`)
+        .attr("transform", `translate(0,${height - 50})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
         .attr("transform", "rotate(-45)")
@@ -142,16 +142,16 @@ function scene2() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height - 50)
+        .attr("text-anchor", "end")
+        .attr("x", (width + 100) / 2)
+        .attr("y", height - 10)
         .text("Region");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", -height / 2)
+        .attr("text-anchor", "end")
+        .attr("x", -50)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
@@ -169,7 +169,7 @@ function scene3() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
-        .attr("height", 600);
+        .attr("height", "100%");
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -184,7 +184,7 @@ function scene3() {
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => +d["Total Deaths"])])
-        .range([height - 100, 50]);
+        .range([height - 50, 50]);
 
     svg.selectAll(".bar")
         .data(data)
@@ -194,11 +194,11 @@ function scene3() {
         .attr("x", d => xScale(d.Country))
         .attr("y", d => yScale(+d["Total Deaths"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 100 - yScale(+d["Total Deaths"]))
+        .attr("height", d => height - 50 - yScale(+d["Total Deaths"]))
         .attr("fill", "steelblue");
 
     svg.append("g")
-        .attr("transform", `translate(0,${height - 100})`)
+        .attr("transform", `translate(0,${height - 50})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
         .attr("transform", "rotate(-45)")
@@ -211,16 +211,16 @@ function scene3() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height - 50)
+        .attr("text-anchor", "end")
+        .attr("x", (width + 100) / 2)
+        .attr("y", height - 10)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", -height / 2)
+        .attr("text-anchor", "end")
+        .attr("x", -50)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
@@ -238,7 +238,7 @@ function scene4() {
     const svg = d3.select("#visualization")
         .append("svg")
         .attr("width", "100%")
-        .attr("height", 600);
+        .attr("height", "100%");
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
@@ -253,7 +253,7 @@ function scene4() {
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(data, d => +d["Total Cases"])])
-        .range([height - 100, 50]);
+        .range([height - 50, 50]);
 
     svg.selectAll(".bar")
         .data(data)
@@ -263,7 +263,7 @@ function scene4() {
         .attr("x", d => xScale(d.Country))
         .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => height - 100 - yScale(+d["Total Cases"]))
+        .attr("height", d => height - 50 - yScale(+d["Total Cases"]))
         .attr("fill", "steelblue")
         .on("mouseover", function(event, d) {
             d3.select(this)
@@ -285,7 +285,7 @@ function scene4() {
         });
 
     svg.append("g")
-        .attr("transform", `translate(0,${height - 100})`)
+        .attr("transform", `translate(0,${height - 50})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
         .attr("transform", "rotate(-45)")
@@ -298,16 +298,16 @@ function scene4() {
     // X axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height - 50)
+        .attr("text-anchor", "end")
+        .attr("x", (width + 100) / 2)
+        .attr("y", height - 10)
         .text("Country");
 
     // Y axis label
     svg.append("text")
         .attr("class", "axis-label")
-        .attr("text-anchor", "middle")
-        .attr("x", -height / 2)
+        .attr("text-anchor", "end")
+        .attr("x", -50)
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
