@@ -19,10 +19,10 @@ function activateButton(buttonId) {
     d3.select(`#${buttonId}`).classed("active", true);
 }
 
-// Scene 1: Introduction to global COVID-19 statistics by country
+// Scene 1: Cases x Country
 function scene1() {
     clearVisualization();
-    activateButton("btn-scene1");
+    activateButton("btn-cases-country");
     if (!covidData) {
         console.error("No data available for Scene 1");
         return;
@@ -95,10 +95,10 @@ function scene1() {
         .text("Total Cases");
 }
 
-// Scene 2: Detailed comparison of COVID-19 deaths by region
+// Scene 2: Deaths x Region
 function scene2() {
     clearVisualization();
-    activateButton("btn-scene2");
+    activateButton("btn-deaths-region");
     if (!covidData) {
         console.error("No data available for Scene 2");
         return;
@@ -171,10 +171,10 @@ function scene2() {
         .text("Total Deaths");
 }
 
-// Scene 3: Country-specific deep dive
+// Scene 3: Deaths x Country
 function scene3() {
     clearVisualization();
-    activateButton("btn-scene3");
+    activateButton("btn-deaths-country");
     if (!covidData) {
         console.error("No data available for Scene 3");
         return;
@@ -247,10 +247,10 @@ function scene3() {
         .text("Total Deaths");
 }
 
-// Scene 4: Interactive exploration of specific countries
+// Scene 4: Cases x Country Details
 function scene4() {
     clearVisualization();
-    activateButton("btn-scene4");
+    activateButton("btn-cases-country-details");
     if (!covidData) {
         console.error("No data available for Scene 4");
         return;
