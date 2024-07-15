@@ -1,5 +1,7 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 #button-container {
@@ -27,9 +29,15 @@ body {
 }
 
 .nav-button.active {
-    background-color: #3e8e41;
+    background-color: #3e8e41; /* Darker green for active state */
 }
 
-.hidden {
-    display: none;
+#visualization {
+    width: 100%;
+    height: calc(100vh - 120px); /* Adjust the height to fill the remaining space */
+}
+
+.axis-label {
+    font-size: 16px;
+    font-weight: bold;
 }
