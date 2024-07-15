@@ -9,10 +9,10 @@
 </head>
 <body>
     <div id="button-container">
-        <button class="nav-button" id="btn-cases-country" onclick="scene1()">Cases x Country</button>
-        <button class="nav-button" id="btn-deaths-region" onclick="scene2()">Deaths x Region</button>
-        <button class="nav-button" id="btn-deaths-country" onclick="scene3()">Deaths x Country</button>
-        <button class="nav-button" id="btn-cases-country-details" onclick="scene4()">Cases x Country Details</button>
+        <button class="nav-button" id="btn-deaths-region" onclick="sceneDeathsRegion()">Deaths x Region</button>
+        <button class="nav-button" id="btn-deaths-country" onclick="sceneDeathsCountry()">Deaths x Country</button>
+        <button class="nav-button hidden" id="btn-cases-country" onclick="sceneCasesCountry()">Cases x Country</button>
+        <button class="nav-button hidden" id="btn-cases-country-details" onclick="sceneCasesCountryDetails()">Cases x Country Details</button>
     </div>
     <div id="visualization"></div>
     <script src="script.js"></script>
