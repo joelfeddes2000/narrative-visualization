@@ -303,15 +303,28 @@ function scene4() {
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.selectAll(".bar")
+    // Add lighter bars for total cases
+    g.selectAll(".bar-cases")
         .data(data)
         .enter()
         .append("rect")
-        .attr("class", "bar")
+        .attr("class", "bar-cases")
         .attr("x", d => xScale(d.Country))
         .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
         .attr("height", d => innerHeight - yScale(+d["Total Cases"]))
+        .attr("fill", "lightsteelblue");
+
+    // Add darker bars for total deaths
+    g.selectAll(".bar-deaths")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar-deaths")
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Deaths"]))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => innerHeight - yScale(+d["Total Deaths"]))
         .attr("fill", "steelblue")
         .on("mouseover", function(event, d) {
             d3.select(this)
@@ -359,6 +372,7 @@ function scene4() {
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
 }
+
 
 // Initialize the first scene
 scene2();
