@@ -29,7 +29,7 @@ function showNextButton(currentButtonId) {
     const currentIndex = buttons.indexOf(currentButtonId);
     if (currentIndex >= 0 && currentIndex < buttons.length - 1) {
         const nextButtonId = buttons[currentIndex + 1];
-        d3.select(`#${nextButtonId}`).style("display", "inline-block");
+        document.getElementById(nextButtonId).style.display = "inline-block";
     }
 }
 
