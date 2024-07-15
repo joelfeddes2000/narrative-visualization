@@ -5,7 +5,7 @@ d3.csv("https://raw.githubusercontent.com/joelfeddes2000/narrative-visualization
     console.log("Data loaded:", data);  // Debugging statement
     covidData = data;
     // Initialize the first scene
-    scene1();
+    scene2();
 }).catch(error => {
     console.error("Error loading the data:", error);
 });
@@ -19,10 +19,25 @@ function activateButton(buttonId) {
     d3.select(`#${buttonId}`).classed("active", true);
 }
 
+function showNextButton(currentButtonId) {
+    const buttons = [
+        "btn-deaths-region",
+        "btn-deaths-country",
+        "btn-cases-country",
+        "btn-cases-country-details"
+    ];
+    const currentIndex = buttons.indexOf(currentButtonId);
+    if (currentIndex >= 0 && currentIndex < buttons.length - 1) {
+        const nextButtonId = buttons[currentIndex + 1];
+        d3.select(`#${nextButtonId}`).style("display", "inline-block");
+    }
+}
+
 // Scene 1: Cases x Country
 function scene1() {
     clearVisualization();
     activateButton("btn-cases-country");
+    showNextButton("btn-cases-country");
     if (!covidData) {
         console.error("No data available for Scene 1");
         return;
@@ -99,6 +114,7 @@ function scene1() {
 function scene2() {
     clearVisualization();
     activateButton("btn-deaths-region");
+    showNextButton("btn-deaths-region");
     if (!covidData) {
         console.error("No data available for Scene 2");
         return;
@@ -176,6 +192,7 @@ function scene2() {
 function scene3() {
     clearVisualization();
     activateButton("btn-deaths-country");
+    showNextButton("btn-deaths-country");
     if (!covidData) {
         console.error("No data available for Scene 3");
         return;
@@ -252,6 +269,7 @@ function scene3() {
 function scene4() {
     clearVisualization();
     activateButton("btn-cases-country-details");
+    showNextButton("btn-cases-country-details");
     if (!covidData) {
         console.error("No data available for Scene 4");
         return;
@@ -343,4 +361,4 @@ function scene4() {
 }
 
 // Initialize the first scene
-scene1();
+scene2();
