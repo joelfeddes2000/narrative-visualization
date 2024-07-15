@@ -355,5 +355,3 @@ function sceneCasesCountryDetails() {
 
 // Initialize the first scene
 sceneDeathsRegion();
-
-
