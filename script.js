@@ -303,19 +303,19 @@ function scene4() {
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.selectAll(".bar")
+    g.selectAll(".cases-bar")
         .data(data)
         .enter()
         .append("rect")
-        .attr("class", "bar")
+        .attr("class", "cases-bar")
         .attr("x", d => xScale(d.Country))
         .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
         .attr("height", d => innerHeight - yScale(+d["Total Cases"]))
-        .attr("fill", "steelblue")
+        .attr("fill", "grey")
         .on("mouseover", function(event, d) {
             d3.select(this)
-                .attr("fill", "orange");
+                .attr("fill", "darkgrey");
 
             const [x, y] = d3.pointer(event);
             g.append("text")
@@ -323,11 +323,40 @@ function scene4() {
                 .attr("x", x + 10)
                 .attr("y", y - 10)
                 .attr("fill", "black")
-                .text(`Cases: ${d["Total Cases"]}, Deaths: ${d["Total Deaths"]}`);
+                .text(`Cases: ${d["Total Cases"]}`);
         })
         .on("mouseout", function() {
             d3.select(this)
-                .attr("fill", "steelblue");
+                .attr("fill", "grey");
+
+            g.select("#tooltip").remove();
+        });
+
+    g.selectAll(".deaths-bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "deaths-bar")
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Deaths"]))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => innerHeight - yScale(+d["Total Deaths"]))
+        .attr("fill", "red")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("fill", "darkred");
+
+            const [x, y] = d3.pointer(event);
+            g.append("text")
+                .attr("id", "tooltip")
+                .attr("x", x + 10)
+                .attr("y", y - 10)
+                .attr("fill", "black")
+                .text(`Deaths: ${d["Total Deaths"]}`);
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .attr("fill", "red");
 
             g.select("#tooltip").remove();
         });
