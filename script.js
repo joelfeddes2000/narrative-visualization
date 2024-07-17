@@ -1,3 +1,4 @@
+
 let covidData;
 
 // Load the dataset from the GitHub repository
@@ -24,7 +25,7 @@ function showNextButton(currentButtonId) {
         "btn-deaths-region",
         "btn-deaths-country",
         "btn-cases-country",
-        "btn-cases-country-details"
+        "btn-cases-region-details"
     ];
     const currentIndex = buttons.indexOf(currentButtonId);
     if (currentIndex >= 0 && currentIndex < buttons.length - 1) {
@@ -265,11 +266,11 @@ function scene3() {
         .text("Total Deaths");
 }
 
-// Scene 4: Cases x Country Details
+// Scene 4: Cases x Region Details
 function scene4() {
     clearVisualization();
-    activateButton("btn-cases-country-details");
-    showNextButton("btn-cases-country-details");
+    activateButton("btn-cases-region-details");
+    showNextButton("btn-cases-region-details");
     if (!covidData) {
         console.error("No data available for Scene 4");
         return;
@@ -287,35 +288,40 @@ function scene4() {
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+    let data = Array.from(d3.group(covidData, d => d.Region), ([key, value]) => ({
+        key,
+        totalCases: d3.sum(value, d => +d["Total Cases"]),
+        totalDeaths: d3.sum(value, d => +d["Total Deaths"])
+    }));
+    data = data.sort((a, b) => d3.descending(a.totalCases, b.totalCases)); // Sort data by Total Cases
     console.log("Scene 4 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.Country))
+        .domain(data.map(d => d.key))
         .range([0, innerWidth])
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => +d["Total Cases"])])
+        .domain([0, d3.max(data, d => d.totalCases)])
         .nice()
         .range([innerHeight, 0]);
 
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.selectAll(".cases-bar")
+    g.selectAll(".bar")
         .data(data)
         .enter()
         .append("rect")
-        .attr("class", "cases-bar")
-        .attr("x", d => xScale(d.Country))
-        .attr("y", d => yScale(+d["Total Cases"]))
+        .attr("class", "bar")
+        .attr("x", d => xScale(d.key))
+        .attr("y", d => yScale(d.totalCases))
         .attr("width", xScale.bandwidth())
-        .attr("height", d => innerHeight - yScale(+d["Total Cases"]))
-        .attr("fill", "grey")
+        .attr("height", d => innerHeight - yScale(d.totalCases))
+        .attr("fill", "steelblue")
         .on("mouseover", function(event, d) {
             d3.select(this)
-                .attr("fill", "darkgrey");
+                .attr("fill", "orange");
 
             const [x, y] = d3.pointer(event);
             g.append("text")
@@ -323,40 +329,11 @@ function scene4() {
                 .attr("x", x + 10)
                 .attr("y", y - 10)
                 .attr("fill", "black")
-                .text(`Cases: ${d["Total Cases"]}`);
+                .text(`Cases: ${d.totalCases}, Deaths: ${d.totalDeaths}`);
         })
         .on("mouseout", function() {
             d3.select(this)
-                .attr("fill", "grey");
-
-            g.select("#tooltip").remove();
-        });
-
-    g.selectAll(".deaths-bar")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("class", "deaths-bar")
-        .attr("x", d => xScale(d.Country))
-        .attr("y", d => yScale(+d["Total Deaths"]))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => innerHeight - yScale(+d["Total Deaths"]))
-        .attr("fill", "red")
-        .on("mouseover", function(event, d) {
-            d3.select(this)
-                .attr("fill", "darkred");
-
-            const [x, y] = d3.pointer(event);
-            g.append("text")
-                .attr("id", "tooltip")
-                .attr("x", x + 10)
-                .attr("y", y - 10)
-                .attr("fill", "black")
-                .text(`Deaths: ${d["Total Deaths"]}`);
-        })
-        .on("mouseout", function() {
-            d3.select(this)
-                .attr("fill", "red");
+                .attr("fill", "steelblue");
 
             g.select("#tooltip").remove();
         });
@@ -377,7 +354,7 @@ function scene4() {
         .attr("text-anchor", "middle")
         .attr("x", margin.left + innerWidth / 2)
         .attr("y", height - 60)
-        .text("Country");
+        .text("Region");
 
     // Y axis label
     svg.append("text")
