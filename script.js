@@ -43,19 +43,20 @@ function scene1() {
         return;
     }
     console.log("Scene 1 data:", covidData);  // Debugging statement
+
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("width", covidData.length * 50) // Set width based on the number of countries
         .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"]));
     console.log("Scene 1 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
@@ -126,27 +127,6 @@ function scene1() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
-
-    // Annotations
-    const annotationGroup = g.append("g").attr("class", "annotations");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 15)
-        .attr("text-anchor", "middle")
-        .attr("fill", "red")
-        .attr("font-weight", "bold")
-        .text("Highest: US")
-        .attr("transform", "translate(0,-10)");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 30)
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr("font-size", "12px")
-        .text(">2x any other country")
-        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 2: Deaths x Region
@@ -167,7 +147,7 @@ function scene2() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -243,27 +223,6 @@ function scene2() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
-
-    // Annotations
-    const annotationGroup = g.append("g").attr("class", "annotations");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0].value) - 15)
-        .attr("text-anchor", "middle")
-        .attr("fill", "red")
-        .attr("font-weight", "bold")
-        .text("Highest: Americas")
-        .attr("transform", "translate(0,-10)");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0].value) - 30)
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr("font-size", "12px")
-        .text(">2x any other region")
-        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 3: Deaths x Country
@@ -276,19 +235,20 @@ function scene3() {
         return;
     }
     console.log("Scene 3 data:", covidData);  // Debugging statement
+
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("width", covidData.length * 50) // Set width based on the number of countries
         .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const data = covidData.sort((a, b) => d3.descending(+a["Total Deaths"], +b["Total Deaths"])).slice(0, 20);
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Deaths"], +b["Total Deaths"]));
     console.log("Scene 3 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
@@ -359,27 +319,6 @@ function scene3() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
-
-    // Annotations
-    const annotationGroup = g.append("g").attr("class", "annotations");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Deaths"]) - 15)
-        .attr("text-anchor", "middle")
-        .attr("fill", "red")
-        .attr("font-weight", "bold")
-        .text("Highest: US")
-        .attr("transform", "translate(0,-10)");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Deaths"]) - 30)
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr("font-size", "12px")
-        .text(">2x any other country")
-        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 4: Cases x Country Details
@@ -392,19 +331,20 @@ function scene4() {
         return;
     }
     console.log("Scene 4 data:", covidData);  // Debugging statement
+
     const svg = d3.select("#visualization")
         .append("svg")
-        .attr("width", window.innerWidth - 50) // Set width based on the window's inner width
+        .attr("width", covidData.length * 50) // Set width based on the number of countries
         .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
 
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
-    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"])).slice(0, 20);
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Cases"], +b["Total Cases"]));
     console.log("Scene 4 processed data:", data);  // Debugging statement
 
     const xScale = d3.scaleBand()
@@ -475,27 +415,6 @@ function scene4() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
-
-    // Annotations
-    const annotationGroup = g.append("g").attr("class", "annotations");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 15)
-        .attr("text-anchor", "middle")
-        .attr("fill", "red")
-        .attr("font-weight", "bold")
-        .text("Highest: US")
-        .attr("transform", "translate(0,-10)");
-
-    annotationGroup.append("text")
-        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 30)
-        .attr("text-anchor", "middle")
-        .attr("fill", "black")
-        .attr("font-size", "12px")
-        .text(">2x any other country")
-        .attr("transform", "translate(0,-10)");
 }
 
 // Initialize the first scene

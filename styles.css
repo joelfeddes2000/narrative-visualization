@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 #button-container {
@@ -35,6 +36,7 @@ body {
 #visualization {
     width: 100%;
     height: calc(100vh - 120px); /* Adjust the height to fill the remaining space */
+    overflow-x: auto; /* Enable horizontal scrolling */
 }
 
 .axis-label {
