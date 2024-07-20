@@ -342,17 +342,17 @@ function scene3() {
         .attr("x1", xScale("Americas") + xScale.bandwidth() / 2)
         .attr("y1", yScale(data.find(d => d.key === "Americas").value))
         .attr("x2", xScale("Europe") + xScale.bandwidth() / 2)
-        .attr("y2", yScale(data.find(d => d.key === "Europe").value))
+        .attr("y2", yScale(data.find(d => d.key === "Europe").value) - 20)
         .attr("stroke", "red")
         .attr("stroke-width", 2);
 
     g.append("text")
-        .attr("x", (xScale("Americas") + xScale("Europe")) / 2)
-        .attr("y", Math.min(yScale(data.find(d => d.key === "Americas").value), yScale(data.find(d => d.key === "Europe").value)) - 10)
-        .attr("text-anchor", "middle")
+        .attr("x", (xScale("Americas") + xScale("Europe")) / 2 + 5)
+        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 25)
+        .attr("text-anchor", "start")
         .attr("fill", "red")
         .attr("font-size", "12px")
-        .text("America had 35.5% more deaths then but had 41.2% less cases when compared to Europe");
+        .text("America had 35.5% more deaths but 41.2% fewer cases than Europe");
 }
 
 // Scene 4: Deaths x Country
