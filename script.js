@@ -142,6 +142,7 @@ function scene1() {
         .attr("y", yScale(data[0]["Total Cases"]) - 55)
         .attr("text-anchor", "start")
         .attr("fill", "red")
+        .attr("font-size", "12px")
         .text("US has more than double the cases of any other country");
 }
 
@@ -335,6 +336,23 @@ function scene3() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
+
+    // Annotation
+    g.append("line")
+        .attr("x1", xScale("Americas") + xScale.bandwidth() / 2)
+        .attr("y1", yScale(data.find(d => d.key === "Americas").value))
+        .attr("x2", xScale("Europe") + xScale.bandwidth() / 2)
+        .attr("y2", yScale(data.find(d => d.key === "Europe").value))
+        .attr("stroke", "red")
+        .attr("stroke-width", 2);
+
+    g.append("text")
+        .attr("x", (xScale("Americas") + xScale("Europe")) / 2)
+        .attr("y", Math.min(yScale(data.find(d => d.key === "Americas").value), yScale(data.find(d => d.key === "Europe").value)) - 10)
+        .attr("text-anchor", "middle")
+        .attr("fill", "red")
+        .attr("font-size", "12px")
+        .text("America had 35.5% more deaths then but had 41.2% less cases when compared to Europe");
 }
 
 // Scene 4: Deaths x Country
