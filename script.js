@@ -150,7 +150,7 @@ function scene1() {
 function scene2() {
     clearVisualization();
     activateButton("btn-deaths-region");
-    showNextButton("btn-cases-region");
+    showNextButton("btn-deaths-region");
     if (!covidData) {
         console.error("No data available for Scene 2");
         return;
@@ -246,7 +246,7 @@ function scene2() {
 function scene3() {
     clearVisualization();
     activateButton("btn-cases-region");
-    showNextButton("btn-deaths-country");
+    showNextButton("btn-cases-region");
     if (!covidData) {
         console.error("No data available for Scene 3");
         return;
@@ -342,14 +342,14 @@ function scene3() {
         .attr("x1", xScale("Americas") + xScale.bandwidth() / 2)
         .attr("y1", yScale(data.find(d => d.key === "Americas").value))
         .attr("x2", xScale("Europe") + xScale.bandwidth() / 2)
-        .attr("y2", yScale(data.find(d => d.key === "Europe").value) - 50)
+        .attr("y2", yScale(data.find(d => d.key === "Europe").value) - 20)
         .attr("stroke", "red")
         .attr("stroke-width", 2);
 
     g.append("text")
-        .attr("x", xScale("Europe") + xScale.bandwidth() / 2)
-        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 60)
-        .attr("text-anchor", "middle")
+        .attr("x", (xScale("Americas") + xScale("Europe")) / 2 + 5)
+        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 25)
+        .attr("text-anchor", "start")
         .attr("fill", "red")
         .attr("font-size", "12px")
         .text("America had 35.5% more deaths but 41.2% fewer cases than Europe");
@@ -359,7 +359,7 @@ function scene3() {
 function scene4() {
     clearVisualization();
     activateButton("btn-deaths-country");
-    showNextButton("btn-cases-country");
+    showNextButton("btn-deaths-country");
     if (!covidData) {
         console.error("No data available for Scene 4");
         return;
