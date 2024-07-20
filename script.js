@@ -80,7 +80,25 @@ function scene1() {
         .attr("y", d => yScale(+d["Total Cases"]))
         .attr("width", xScale.bandwidth())
         .attr("height", d => innerHeight - yScale(+d["Total Cases"]))
-        .attr("fill", "steelblue");
+        .attr("fill", "steelblue")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("fill", "orange");
+
+            const [x, y] = d3.pointer(event);
+            g.append("text")
+                .attr("id", "tooltip")
+                .attr("x", x + 10)
+                .attr("y", y - 10)
+                .attr("fill", "black")
+                .text(`Cases: ${d["Total Cases"]}, Deaths: ${d["Total Deaths"]}`);
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .attr("fill", "steelblue");
+
+            g.select("#tooltip").remove();
+        });
 
     g.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -108,6 +126,15 @@ function scene1() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
+
+    // Annotations
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight", "bold")
+        .text(`Highest: ${data[0].Country}`);
 }
 
 // Scene 2: Deaths x Region
@@ -158,7 +185,25 @@ function scene2() {
         .attr("y", d => yScale(d.value))
         .attr("width", xScale.bandwidth())
         .attr("height", d => innerHeight - yScale(d.value))
-        .attr("fill", "steelblue");
+        .attr("fill", "steelblue")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("fill", "orange");
+
+            const [x, y] = d3.pointer(event);
+            g.append("text")
+                .attr("id", "tooltip")
+                .attr("x", x + 10)
+                .attr("y", y - 10)
+                .attr("fill", "black")
+                .text(`Deaths: ${d.value}`);
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .attr("fill", "steelblue");
+
+            g.select("#tooltip").remove();
+        });
 
     g.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -186,6 +231,15 @@ function scene2() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
+
+    // Annotations
+    g.append("text")
+        .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0].value) - 10)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight", "bold")
+        .text(`Highest: ${data[0].key}`);
 }
 
 // Scene 3: Deaths x Country
@@ -235,7 +289,25 @@ function scene3() {
         .attr("y", d => yScale(+d["Total Deaths"]))
         .attr("width", xScale.bandwidth())
         .attr("height", d => innerHeight - yScale(+d["Total Deaths"]))
-        .attr("fill", "steelblue");
+        .attr("fill", "steelblue")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("fill", "orange");
+
+            const [x, y] = d3.pointer(event);
+            g.append("text")
+                .attr("id", "tooltip")
+                .attr("x", x + 10)
+                .attr("y", y - 10)
+                .attr("fill", "black")
+                .text(`Deaths: ${d["Total Deaths"]}`);
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .attr("fill", "steelblue");
+
+            g.select("#tooltip").remove();
+        });
 
     g.append("g")
         .attr("transform", `translate(0,${innerHeight})`)
@@ -263,6 +335,15 @@ function scene3() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Deaths");
+
+    // Annotations
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Deaths"]) - 10)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight", "bold")
+        .text(`Highest: ${data[0].Country}`);
 }
 
 // Scene 4: Cases x Country Details
@@ -358,6 +439,15 @@ function scene4() {
         .attr("y", 20)
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
+
+    // Annotations
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("text-anchor", "middle")
+        .attr("fill", "black")
+        .attr("font-weight", "bold")
+        .text(`Highest: ${data[0].Country}`);
 }
 
 // Initialize the first scene
