@@ -51,7 +51,7 @@ function scene1() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 100, bottom: 150, left: 100 }; // Increase the bottom margin and add right margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -128,39 +128,14 @@ function scene1() {
         .text("Total Cases");
 
     // Annotations
-    const annotations = svg.append("g")
-        .attr("transform", `translate(${margin.left + innerWidth},${margin.top})`);
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[0]["Total Cases"]))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("text-anchor", "middle")
         .attr("fill", "black")
         .attr("font-weight", "bold")
-        .text("US has more than double any other country");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[0]["Total Cases"]))
-        .attr("y2", yScale(data[0]["Total Cases"]) - 5)
-        .attr("stroke", "black");
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[1]["Total Cases"]))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
-        .attr("fill", "black")
-        .text("India is the second highest");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[1]["Total Cases"]))
-        .attr("y2", yScale(data[1]["Total Cases"]) - 5)
-        .attr("stroke", "black");
+        .attr("transform", "rotate(-90)")
+        .text("Highest: US\n>2x any other country");
 }
 
 // Scene 2: Deaths x Region
@@ -181,7 +156,7 @@ function scene2() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 100, bottom: 150, left: 100 }; // Increase the bottom margin and add right margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -259,24 +234,14 @@ function scene2() {
         .text("Total Deaths");
 
     // Annotations
-    const annotations = svg.append("g")
-        .attr("transform", `translate(${margin.left + innerWidth},${margin.top})`);
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[0].value))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
+    g.append("text")
+        .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0].value) - 10)
+        .attr("text-anchor", "middle")
         .attr("fill", "black")
         .attr("font-weight", "bold")
+        .attr("transform", "rotate(-90)")
         .text("Highest: Americas");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[0].value))
-        .attr("y2", yScale(data[0].value) - 5)
-        .attr("stroke", "black");
 }
 
 // Scene 3: Deaths x Country
@@ -297,7 +262,7 @@ function scene3() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 100, bottom: 150, left: 100 }; // Increase the bottom margin and add right margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -374,24 +339,14 @@ function scene3() {
         .text("Total Deaths");
 
     // Annotations
-    const annotations = svg.append("g")
-        .attr("transform", `translate(${margin.left + innerWidth},${margin.top})`);
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[0]["Total Deaths"]))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Deaths"]) - 10)
+        .attr("text-anchor", "middle")
         .attr("fill", "black")
         .attr("font-weight", "bold")
-        .text("Highest: United States");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[0]["Total Deaths"]))
-        .attr("y2", yScale(data[0]["Total Deaths"]) - 5)
-        .attr("stroke", "black");
+        .attr("transform", "rotate(-90)")
+        .text("Highest: US");
 }
 
 // Scene 4: Cases x Country Details
@@ -412,7 +367,7 @@ function scene4() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 20, right: 100, bottom: 150, left: 100 }; // Increase the bottom margin and add right margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 }; // Increase the bottom margin
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -489,39 +444,14 @@ function scene4() {
         .text("Total Cases");
 
     // Annotations
-    const annotations = svg.append("g")
-        .attr("transform", `translate(${margin.left + innerWidth},${margin.top})`);
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[0]["Total Cases"]))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
+    g.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("text-anchor", "middle")
         .attr("fill", "black")
         .attr("font-weight", "bold")
-        .text("US has more than double any other country");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[0]["Total Cases"]))
-        .attr("y2", yScale(data[0]["Total Cases"]) - 5)
-        .attr("stroke", "black");
-
-    annotations.append("text")
-        .attr("x", 10)
-        .attr("y", yScale(data[1]["Total Cases"]))
-        .attr("dy", "-1em")
-        .attr("text-anchor", "start")
-        .attr("fill", "black")
-        .text("India is the second highest");
-
-    annotations.append("line")
-        .attr("x1", -10)
-        .attr("x2", -100)
-        .attr("y1", yScale(data[1]["Total Cases"]))
-        .attr("y2", yScale(data[1]["Total Cases"]) - 5)
-        .attr("stroke", "black");
+        .attr("transform", "rotate(-90)")
+        .text("Highest: US\n>2x any other country");
 }
 
 // Initialize the first scene
