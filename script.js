@@ -128,14 +128,25 @@ function scene1() {
         .text("Total Cases");
 
     // Annotations
-    g.append("text")
+    const annotationGroup = g.append("g").attr("class", "annotations");
+
+    annotationGroup.append("text")
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("y", yScale(data[0]["Total Cases"]) - 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "red")
+        .attr("font-weight", "bold")
+        .text("Highest: US")
+        .attr("transform", "translate(0,-10)");
+
+    annotationGroup.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 30)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-weight", "bold")
-        .attr("transform", "rotate(-90)")
-        .text("Highest: US\n>2x any other country");
+        .attr("font-size", "12px")
+        .text(">2x any other country")
+        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 2: Deaths x Region
@@ -234,14 +245,25 @@ function scene2() {
         .text("Total Deaths");
 
     // Annotations
-    g.append("text")
+    const annotationGroup = g.append("g").attr("class", "annotations");
+
+    annotationGroup.append("text")
         .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0].value) - 10)
+        .attr("y", yScale(data[0].value) - 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "red")
+        .attr("font-weight", "bold")
+        .text("Highest: Americas")
+        .attr("transform", "translate(0,-10)");
+
+    annotationGroup.append("text")
+        .attr("x", xScale(data[0].key) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0].value) - 30)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-weight", "bold")
-        .attr("transform", "rotate(-90)")
-        .text("Highest: Americas");
+        .attr("font-size", "12px")
+        .text(">2x any other region")
+        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 3: Deaths x Country
@@ -339,14 +361,25 @@ function scene3() {
         .text("Total Deaths");
 
     // Annotations
-    g.append("text")
+    const annotationGroup = g.append("g").attr("class", "annotations");
+
+    annotationGroup.append("text")
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Deaths"]) - 10)
+        .attr("y", yScale(data[0]["Total Deaths"]) - 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "red")
+        .attr("font-weight", "bold")
+        .text("Highest: US")
+        .attr("transform", "translate(0,-10)");
+
+    annotationGroup.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Deaths"]) - 30)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-weight", "bold")
-        .attr("transform", "rotate(-90)")
-        .text("Highest: US");
+        .attr("font-size", "12px")
+        .text(">2x any other country")
+        .attr("transform", "translate(0,-10)");
 }
 
 // Scene 4: Cases x Country Details
@@ -444,14 +477,25 @@ function scene4() {
         .text("Total Cases");
 
     // Annotations
-    g.append("text")
+    const annotationGroup = g.append("g").attr("class", "annotations");
+
+    annotationGroup.append("text")
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
-        .attr("y", yScale(data[0]["Total Cases"]) - 10)
+        .attr("y", yScale(data[0]["Total Cases"]) - 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "red")
+        .attr("font-weight", "bold")
+        .text("Highest: US")
+        .attr("transform", "translate(0,-10)");
+
+    annotationGroup.append("text")
+        .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2)
+        .attr("y", yScale(data[0]["Total Cases"]) - 30)
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .attr("font-weight", "bold")
-        .attr("transform", "rotate(-90)")
-        .text("Highest: US\n>2x any other country");
+        .attr("font-size", "12px")
+        .text(">2x any other country")
+        .attr("transform", "translate(0,-10)");
 }
 
 // Initialize the first scene
