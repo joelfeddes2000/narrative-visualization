@@ -128,7 +128,6 @@ function scene1() {
         .attr("transform", "rotate(-90)")
         .text("Total Cases");
 
-    // Annotations
     g.append("line")
         .attr("x1", xScale(data[0].Country) + xScale.bandwidth() / 2)
         .attr("y1", yScale(data[0]["Total Cases"]))
@@ -136,10 +135,13 @@ function scene1() {
         .attr("y2", yScale(data[0]["Total Cases"]) - 50)
         .attr("stroke", "red")
         .attr("stroke-width", 2);
-
+    
+    const annotationY = yScale(data[0]["Total Cases"]) - 50;
+    const textY = annotationY < 20 ? annotationY + 70 : annotationY - 10; // Adjust position based on available space
+    
     g.append("text")
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2 + 5)
-        .attr("y", yScale(data[0]["Total Cases"]) - 100)
+        .attr("y", textY)
         .attr("text-anchor", "start")
         .attr("fill", "red")
         .attr("font-size", "10px")
