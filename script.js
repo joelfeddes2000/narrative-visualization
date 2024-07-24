@@ -134,8 +134,8 @@ function scene1() {
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() + 55)
         .attr("y", yScale(data[0]["Total Cases"]) - 5)
         .attr("text-anchor", "start")
-        .attr("fill", "black")
-        .attr("font-size", "10px")
+        .attr("fill", "red")
+        .attr("font-size", "12px")
         .text("US has more than double the cases of any other country");
 }
 
@@ -341,7 +341,7 @@ function scene3() {
 
     g.append("text")
         .attr("x", (xScale("Americas") + xScale("Europe")) / 2 + 5)
-        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 25)
+        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 10)
         .attr("text-anchor", "start")
         .attr("fill", "red")
         .attr("font-size", "10px")
