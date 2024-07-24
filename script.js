@@ -139,10 +139,10 @@ function scene1() {
 
     g.append("text")
         .attr("x", xScale(data[0].Country) + xScale.bandwidth() / 2 + 5)
-        .attr("y", yScale(data[0]["Total Cases"]) - 55)
+        .attr("y", yScale(data[0]["Total Cases"]) - 100)
         .attr("text-anchor", "start")
         .attr("fill", "red")
-        .attr("font-size", "12px")
+        .attr("font-size", "10px")
         .text("US has more than double the cases of any other country");
 }
 
