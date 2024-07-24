@@ -341,7 +341,7 @@ function scene3() {
 
     g.append("text")
         .attr("x", (xScale("Americas") + xScale("Europe")) / 2 + 5)
-        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 10)
+        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 25)
         .attr("text-anchor", "start")
         .attr("fill", "red")
         .attr("font-size", "10px")
