@@ -260,7 +260,7 @@ function scene3() {
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
 
-    const margin = { top: 40, right: 30, bottom: 150, left: 100 }; // Increase the top margin
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -338,24 +338,117 @@ function scene3() {
         .text("Total Cases");
 
     // Annotation
-    const americasValue = data.find(d => d.key === "Americas").value;
-    const europeValue = data.find(d => d.key === "Europe").value;
-    
     g.append("line")
         .attr("x1", xScale("Americas") + xScale.bandwidth() / 2)
-        .attr("y1", yScale(americasValue))
+        .attr("y1", yScale(data.find(d => d.key === "Americas").value))
         .attr("x2", xScale("Europe") + xScale.bandwidth() / 2)
-        .attr("y2", yScale(europeValue) - 40) // Adjusted to fit the annotation within the chart area
+        .attr("y2", yScale(data.find(d => d.key === "Europe").value) - 20)
         .attr("stroke", "red")
         .attr("stroke-width", 2);
 
     g.append("text")
         .attr("x", (xScale("Americas") + xScale("Europe")) / 2 + 5)
-        .attr("y", yScale(europeValue) - 45) // Adjusted to fit the annotation within the chart area
+        .attr("y", yScale(data.find(d => d.key === "Europe").value) - 25)
         .attr("text-anchor", "start")
         .attr("fill", "red")
-        .attr("font-size", "12px")
+        .attr("font-size", "10px")
         .text("America had 35.5% more deaths but 41.2% fewer cases than Europe");
+}
+
+// Scene 4: Deaths x Country
+function scene4() {
+    clearVisualization();
+    activateButton("btn-deaths-country");
+    showNextButton("btn-deaths-country");
+    if (!covidData) {
+        console.error("No data available for Scene 4");
+        return;
+    }
+    console.log("Scene 4 data:", covidData);  // Debugging statement
+
+    const svg = d3.select("#visualization")
+        .append("svg")
+        .attr("width", covidData.length * 50) // Set width based on the number of countries
+        .attr("height", window.innerHeight - 150); // Set height based on the window's inner height
+
+    const width = svg.node().getBoundingClientRect().width;
+    const height = svg.node().getBoundingClientRect().height;
+
+    const margin = { top: 20, right: 30, bottom: 150, left: 100 };
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+
+    const data = covidData.sort((a, b) => d3.descending(+a["Total Deaths"], +b["Total Deaths"]));
+    console.log("Scene 4 processed data:", data);  // Debugging statement
+
+    const xScale = d3.scaleBand()
+        .domain(data.map(d => d.Country))
+        .range([0, innerWidth])
+        .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => +d["Total Deaths"])])
+        .nice()
+        .range([innerHeight, 0]);
+
+    const g = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    g.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => xScale(d.Country))
+        .attr("y", d => yScale(+d["Total Deaths"]))
+        .attr("width", xScale.bandwidth())
+        .attr("height", d => innerHeight - yScale(+d["Total Deaths"]))
+        .attr("fill", "steelblue")
+        .on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("fill", "orange");
+
+            const [x, y] = d3.pointer(event);
+            g.append("text")
+                .attr("id", "tooltip")
+                .attr("x", x + 10)
+                .attr("y", y - 10)
+                .attr("fill", "black")
+                .text(`Deaths: ${d["Total Deaths"]}`);
+        })
+        .on("mouseout", function() {
+            d3.select(this)
+                .attr("fill", "steelblue");
+
+            g.select("#tooltip").remove();
+        });
+
+    g.append("g")
+        .attr("transform", `translate(0,${innerHeight})`)
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
+
+    g.append("g")
+        .call(d3.axisLeft(yScale));
+
+    // X axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "middle")
+        .attr("x", margin.left + innerWidth / 2)
+        .attr("y", height - 60)
+        .text("Country");
+
+    // Y axis label
+    svg.append("text")
+        .attr("class", "axis-label")
+        .attr("text-anchor", "middle")
+        .attr("x", -(margin.top + innerHeight / 2))
+        .attr("y", 20)
+        .attr("transform", "rotate(-90)")
+        .text("Total Deaths");
 }
 
 // Initialize the first scene
